@@ -16,9 +16,17 @@ app.post('/todos', (req, res) => {
   })
 
   newTodo.save().then(doc => {
-    res.send(doc)
+    res.status(200).send(doc)
   }, err => {
-    res.send(err)
+    res.status(400).send(err)
+  })
+})
+
+app.get('/todos', (req, res) => {
+  Todo.find().then(result => {
+    res.send({result})
+  }, err => {
+    res.status(400).send(err)
   })
 })
 
